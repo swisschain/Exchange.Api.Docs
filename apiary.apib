@@ -1,0 +1,394 @@
+FORMAT: 1A
+HOST: https://exchange.swisschain.io/
+
+# Swisschain - Exchange
+
+Exchange is an API allowing the broker to setup exchange with trading between any asset and track account balances.
+
+# API usage
+
+## Allowed HTTP Verbs:
+- `PUT` : Updates a resource 
+- `POST` : Creates a resource
+- `GET` : Gets a resource or list of resources
+- `DELETE` : Deletes a resource
+
+## Description Of Usual Server Responses:
+- 200 `OK` : the request was successful.
+- 201 `Created` : the request was successful and a resource was created.
+- 204 `No Content` : the request was successful but there is no representation to return.
+- 400 `Bad Request` : the request has invalid or missing required parameters.
+- 401 `Unauthorized` : authentication failed.
+- 403 `Forbidden` : access denied.
+- 404 `Not Found` : resource was not found.
+
+## Authorization
+
+TODO
+
+## Pagination
+
+TODO
+
+## Error responses
+
+TODO
+
+## Asset [/api/asset/publicassets{?pageSize}]
+
+Asset controller allow broker configuration assets for his exchange.
+
+---
+
++ Attributes (object)
+    + id: "8cea5fd7-42d4-40ac-907d-5856eacf6ab6" (string) - Asset unique ID. 
+    + name: "USD" (string) - Name of asset.
+    + description: "U.S. dollar" (string) - Description of asset
+    + accuracy: 2 (number) - Counts of numbers after the comma
+    + isDisabled: false (boolean) - Asset state
+    + created (string) - Date & time of created acsset. Time zone: UTC+0. Format: ICO 8601.
+    + modified (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
+    
+
+### Get List All Assets [GET]
+
+Get a list of all listed assets.
+
++ Parameters
+    + pageSize (optional, Number) - Count item on page
+
++ Request 
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
+
++ Response 200 (application/json)
+
+        [
+            {
+                "items": [
+                    {
+                        "id": "11542",
+                        "name": "BTC",
+                        "description": "Bitcoin",
+                        "accuracy": 18,
+                        "isDisabled": false,
+                        "created": "2020-03-07T11:52:30.396827Z",
+                        "modified": "2020-03-07T11:52:30.396827Z"
+                    }, 
+                    {
+                        "id": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                        "name": "USD",
+                        "description": "U.S. dollar",
+                        "accuracy": 2,
+                        "isDisabled": true,
+                        "created": "2020-03-07T11:52:30.396827Z",
+                        "modified": "2020-03-07T11:52:30.396827Z"
+                    }
+                ]
+            }
+        ]
+
+### Create a New Asset [POST]
+
+Create and listing new asset.
+
++ Request (application/json)
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "id": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "name": "USD",
+                "description": "U.S. dollar",
+                "accuracy": 2,
+                "isDisabled": true,
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "name": "USD",
+                "description": "U.S. dollar",
+                "accuracy": 2,
+                "isDisabled": true,
+                "created": "2020-03-07T11:52:30.396827Z",
+                "modified": "2020-03-07T11:52:30.396827Z"
+            }
+            
+### Update existing Asset [PUT]
+
+Update parameters for the existing asset.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "id": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "name": "USD",
+                "description": "U.S. dollar",
+                "accuracy": 2,
+                "isDisabled": true
+            }
+
++ Response 204 (application/json)
+
+### Get Asset [GET/api/asset/publicassets/{assetId}]
+
+Get a asset by ID
+
++ Parameters
+    + assetId (string) - Asset qniquie ID
+    
++ Request
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
+
++ Response 200 (application/json)
+
+        {
+            "id": "11542",
+            "name": "BTC",
+            "description": "Bitcoin",
+            "accuracy": 18,
+            "isDisabled": false,
+            "created": "2020-03-07T11:52:30.396827Z",
+            "modified": "2020-03-07T11:52:30.396827Z"
+        }
+        
+### Delete existing Asset [DELETE/api/asset/publicassets/{assetId}]
+
+Delete existing asset from exchange
+
++ Parameters
+    + assetId (string) - Asset qniquie ID
+    
++ Request 
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
++ Response 204 
+
+
+## AssetPair [/api/asset/api/publicassetpairs{?limit}]
+
+AssetPair controller allow broker configuration asset pair for his exchange.
+
+---
+
++ Attributes (object)
+
+    + id: "8cea5fd7-42d4-40ac-907d-5856eacf6ab6" (string) - Asset pair unique ID. 
+    + name: "USD" (string) - Name of asset pair.
+    + baseAssetId: "BTC" (string) - Name of base asset in pair.
+    + quotingAssetId: "8cea5fd7-42d4-40ac-907d-5856eacf6ab6" (string) - Name of quoting asst in pair.
+    + minVolume: 0.000001 (number) - Min volume for order
+    + maxVolume: 40 (number) - Max volume for order
+    + maxOppositeVolume: 100000 (number) - Max volume in quote asset for order
+    + marketOrderPriceThreshold: 15 (number) - Allowable slippage for a market order in %
+    + accuracy: 2 (number) - Counts of numbers after the comma in price
+    + isDisabled: false (boolean) - Asset pair state
+    + created (string) - Date & time of created acsset. Time zone: UTC+0. Format: ICO 8601.
+    + modified (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
+    
+
+### Get list of all asset pairs [GET]
+
+Get a list of all listed asset pairs.
+
++ Parameters
+    + limit (optional, Number) - Count item on page
+
++ Request 
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
+
++ Response 200 (application/json)
+
+        [
+            {
+                "items": [
+                    {
+                        "id": "11542",
+                        "name": "BTC",
+                        "description": "Bitcoin",
+                        "accuracy": 18,
+                        "isDisabled": false,
+                        "created": "2020-03-07T11:52:30.396827Z",
+                        "modified": "2020-03-07T11:52:30.396827Z"
+                    }, 
+                    {
+                        "id": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                        "name": "USD",
+                        "description": "U.S. dollar",
+                        "accuracy": 2,
+                        "isDisabled": true,
+                        "created": "2020-03-07T11:52:30.396827Z",
+                        "modified": "2020-03-07T11:52:30.396827Z"
+                    }
+                ]
+            }
+        ]
+        [
+            {
+                "id": "BTCUSD",
+                "name": "BTCUSD",
+                "baseAssetId": "BTC",
+                "quotingAssetId": "USD",
+                "accuracy": 3,
+                "minVolume": 1e-8,
+                "maxVolume": 10001,
+                "maxOppositeVolume": 10001,
+                "marketOrderPriceThreshold": 10001,
+                "isDisabled": false,
+                "created": "2020-03-07T12:01:16.959924Z",
+                "modified": "2020-03-20T10:46:45.440441Z"
+            },
+            {
+                "id": "9aea6fd7-42d4-40ac-907d-5856eacf6ee8",
+                "name": "BTCETH",
+                "baseAssetId": "BTC",
+                "quotingAssetId": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "accuracy": 3,
+                "minVolume": 1e-8,
+                "maxVolume": 10001,
+                "maxOppositeVolume": 10001,
+                "marketOrderPriceThreshold": 10001,
+                "isDisabled": false,
+                "created": "2020-03-07T12:01:16.959924Z",
+                "modified": "2020-03-20T10:46:45.440441Z"
+            }
+        ]        
+
+### Create a new asset pair [POST]
+
+Create and listing new asset pair.
+
++ Request (application/json)
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "id": "9aea6fd7-42d4-40ac-907d-5856eacf6ee8",
+                "name": "BTCETH",
+                "baseAssetId": "BTC",
+                "quotingAssetId": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "accuracy": 3,
+                "minVolume": 1e-8,
+                "maxVolume": 10001,
+                "maxOppositeVolume": 10001,
+                "marketOrderPriceThreshold": 10001,
+                "isDisabled": false
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": "9aea6fd7-42d4-40ac-907d-5856eacf6ee8",
+                "name": "BTCETH",
+                "baseAssetId": "BTC",
+                "quotingAssetId": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "accuracy": 3,
+                "minVolume": 1e-8,
+                "maxVolume": 10001,
+                "maxOppositeVolume": 10001,
+                "marketOrderPriceThreshold": 10001,
+                "isDisabled": false,
+                "created": "2020-03-07T11:52:30.396827Z",
+                "modified": "2020-03-07T11:52:30.396827Z"
+            }
+            
+### Update existing Asset [PUT]
+
+Update parameters for the existing asset pair.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "id": "9aea6fd7-42d4-40ac-907d-5856eacf6ee8",
+                "name": "BTCETH",
+                "baseAssetId": "BTC",
+                "quotingAssetId": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+                "accuracy": 3,
+                "minVolume": 1e-8,
+                "maxVolume": 10001,
+                "maxOppositeVolume": 10001,
+                "marketOrderPriceThreshold": 10001,
+                "isDisabled": false
+            }
+
++ Response 204 (application/json)
+
+### Get Asset [GET/api/asset/publicassetpairs/{assetPairId}]
+
+Get a asset pair by ID
+
++ Parameters
+    + assetPairId (string) - Asset qniquie ID
+    
++ Request
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
+
++ Response 200 (application/json)
+
+        {
+            "id": "9aea6fd7-42d4-40ac-907d-5856eacf6ee8",
+            "name": "BTCETH",
+            "baseAssetId": "BTC",
+            "quotingAssetId": "8cea5fd7-42d4-40ac-907d-5856eacf6ab6",
+            "accuracy": 3,
+            "minVolume": 1e-8,
+            "maxVolume": 10001,
+            "maxOppositeVolume": 10001,
+            "marketOrderPriceThreshold": 10001,
+            "isDisabled": false,
+            "created": "2020-03-07T11:52:30.396827Z",
+            "modified": "2020-03-07T11:52:30.396827Z"
+        }
+        
+### Delete existing asset pair [DELETE/api/asset/publicassetpairs/{assetId}]
+
+Delete existing asset pair from exchange
+
++ Parameters
+    + assetId (string) - Asset pair qniquie ID
+    
++ Request 
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
++ Response 204
