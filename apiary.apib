@@ -41,13 +41,13 @@ Asset controller allow broker configuration assets for his exchange.
 ---
 
 + Attributes (object)
-    + id: "8cea5fd7-42d4-40ac-907d-5856eacf6ab6" (string) - Asset unique ID. 
+    + id: `8cea5fd7-42d4-40ac-907d-5856eacf6ab6` (string) - Asset unique ID. 
     + name: "USD" (string) - Name of asset.
     + description: "U.S. dollar" (string) - Description of asset
     + accuracy: 2 (number) - Counts of numbers after the comma
     + isDisabled: false (boolean) - Asset state
-    + created (string) - Date & time of created acsset. Time zone: UTC+0. Format: ICO 8601.
-    + modified (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
+    + created: `2020-03-07T11:52:30.396827Z` (string) - Date & time of created acsset. Time zone: UTC+0. Format: ICO 8601.
+    + modified: `2020-03-07T11:52:30.396827Z` (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
     
 
 ### Get List All Assets [GET]
@@ -194,18 +194,18 @@ AssetPair controller allow broker configuration asset pair for his exchange.
 
 + Attributes (object)
 
-    + id: "8cea5fd7-42d4-40ac-907d-5856eacf6ab6" (string) - Asset pair unique ID. 
+    + id: `8cea5fd7-42d4-40ac-907d-5856eacf6ab6` (string) - Asset pair unique ID. 
     + name: "USD" (string) - Name of asset pair.
     + baseAssetId: "BTC" (string) - Name of base asset in pair.
-    + quotingAssetId: "8cea5fd7-42d4-40ac-907d-5856eacf6ab6" (string) - Name of quoting asst in pair.
+    + quotingAssetId: `8cea5fd7-42d4-40ac-907d-5856eacf6ab6` (string) - Name of quoting asst in pair.
     + minVolume: 0.000001 (number) - Min volume for order
     + maxVolume: 40 (number) - Max volume for order
     + maxOppositeVolume: 100000 (number) - Max volume in quote asset for order
     + marketOrderPriceThreshold: 15 (number) - Allowable slippage for a market order in %
     + accuracy: 2 (number) - Counts of numbers after the comma in price
     + isDisabled: false (boolean) - Asset pair state
-    + created (string) - Date & time of created acsset. Time zone: UTC+0. Format: ICO 8601.
-    + modified (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
+    + created: `2020-03-07T11:52:30.396827Z` (string) - Date & time of created acsset. Time zone: UTC+0. Format: ICO 8601.
+    + modified: `2020-03-07T11:52:30.396827Z` (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
     
 
 ### Get list of all asset pairs [GET]
