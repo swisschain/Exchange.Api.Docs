@@ -34,7 +34,7 @@ TODO
 
 TODO
 
-## Asset [/api/asset/publicassets{?pageSize}]
+## Asset [/api/asset/public-assets{?pageSize}]
 
 Asset controller allow broker configuration assets for his exchange.
 
@@ -146,7 +146,7 @@ Update parameters for the existing asset.
 
 + Response 204 (application/json)
 
-### Get Asset [GET/api/asset/publicassets/{assetId}]
+### Get Asset [GET/api/asset/public-assets/{assetId}]
 
 Get a asset by ID
 
@@ -171,7 +171,7 @@ Get a asset by ID
             "modified": "2020-03-07T11:52:30.396827Z"
         }
         
-### Delete existing Asset [DELETE/api/asset/publicassets/{assetId}]
+### Delete existing Asset [DELETE/api/asset/public-assets/{assetId}]
 
 Delete existing asset from exchange
 
@@ -186,7 +186,7 @@ Delete existing asset from exchange
 + Response 204 
 
 
-## AssetPair [/api/asset/api/publicassetpairs{?limit}]
+## AssetPair [/api/asset/public-asset-pairs]
 
 AssetPair controller allow broker configuration asset pair for his exchange.
 
@@ -208,12 +208,12 @@ AssetPair controller allow broker configuration asset pair for his exchange.
     + modified: `2020-03-07T11:52:30.396827Z` (string) - Date & time of last modified asset. Time zone: UTC+0. Format: ICO 8601.
     
 
-### Get list of all asset pairs [GET]
+### Get list of all asset pairs [GET/api/asset/public-asset-pairs{?limit}]
 
 Get a list of all listed asset pairs.
 
 + Parameters
-    + limit (optional, Number) - Count item on page
+    + limit (optional, number) - Count item on page
 
 + Request 
     + Headers
@@ -349,7 +349,7 @@ Update parameters for the existing asset pair.
 
 + Response 204 (application/json)
 
-### Get Asset [GET/api/asset/publicassetpairs/{assetPairId}]
+### Get Asset [GET/api/asset/public-asset-pairs/{assetPairId}]
 
 Get a asset pair by ID
 
@@ -379,7 +379,7 @@ Get a asset pair by ID
             "modified": "2020-03-07T11:52:30.396827Z"
         }
         
-### Delete existing asset pair [DELETE/api/asset/publicassetpairs/{assetId}]
+### Delete existing asset pair [DELETE/api/asset/public-asset-pairs/{assetId}]
 
 Delete existing asset pair from exchange
 
@@ -392,3 +392,25 @@ Delete existing asset pair from exchange
             Authorization: Bearer <put your api key>
 
 + Response 204
+
+
+## Temp [/api/temp]
+
+### Make a access token [POST/api/temp/sign-in]
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "email": "admin@admin.com",
+                "password": "admin"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "token": "....."
+            }
