@@ -1,5 +1,6 @@
 FORMAT: 1A
-HOST: https://exchange.swisschain.io/
+HOST: https://exchange.swisschain.io
+
 
 # Swisschain - Exchange
 
@@ -393,6 +394,93 @@ Delete existing asset pair from exchange
 
 + Response 204
 
+## Limit Order managment [/api/operations/trading/limit-order]
+
+The controller allows a broker to manage limit orders for clients
+
+### Create a new single limit order [POST]
+
++ Request (application/json)
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "LimitOrderId": "00212c6e-2a5c-4d34-a058-9a46b4279285",
+                "assetPairId": "BTCUSD",
+                "price": 8000,
+                "volume": 0.001,
+                "walletId": "123333",
+                "type": "Sell",
+                "cancelPrevious": true
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": "00212c6e-2a5c-4d34-a058-9a46b4279285",
+                "status": "Ok",
+                "reason": null            
+            }
+            
+### Delete a single limit order [DELETE/api/operations/trading/limit-order/{limitOrderId}]
+
++ Parameters
+    + limitOrderId (string) - Asset pair qniquie ID
+    
++ Request 
+    + Headers
+
+            Authorization: Bearer <put your api key>
+            
++ Response 204
+
+## Cash managment [/api/operations/cash-management]
+
+The controller allows a broker to manage balances for clients.
+
+### Increase balance for a client [POST/api/operations/cash-management/cash-in]
+
++ Request (application/json)
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "clientId": "123111",
+                "assetId": "BTC",
+                "amount": 1.34
+            }
+
++ Response 204 (application/json)
+
+### Decrease balance for a client [POST/api/operations/cash-management/cash-out]
+
++ Request (application/json)
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+                "clientId": "123111",
+                "assetId": "BTC",
+                "amount": 1.34
+            }
+
++ Response 204 (application/json)
+
+
 
 ## Temp [/api/temp]
 
@@ -414,3 +502,16 @@ Delete existing asset pair from exchange
             {
                 "token": "....."
             }
+            
+### Get wallet balance [GET/api/operations/temp/balance/{walletId}]
+
++ Parameters
+    + walletId (string) - Asset pair qniquie ID
+    
++ Request 
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
++ Response 200 (application/json)
