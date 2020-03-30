@@ -400,10 +400,10 @@ The controller allows a broker to manage limit orders for clients
 
 ### Create a new single limit order [POST]
 
-+ POST Request Body
++ Body description
     + walletId: (string) - Client ID for which a limit order is set.
     + assetPairId: (string) - Asset pair ID to make limit order.
-    + price: (decimal) - Proce of limit order.
+    + price: (decimal) - Price of limit order.
     + volume: (decimal) - Volume in base asset for limmit order.
     + type: (string) - The limit order type: `Sell`, `Buy`.
 
@@ -451,6 +451,11 @@ The controller allows a broker to manage balances for clients.
 
 ### Increase balance for a client [POST/api/operations/cash-management/cash-in]
 
++ Body description
+    + clientId: (string) - Client ID for which a balance will change.
+    + assetId: (string) - Asset ID to change balance.
+    + amount: (decimal) - Balance change amount.
+
 + Request (application/json)
 
     + Headers
@@ -469,6 +474,11 @@ The controller allows a broker to manage balances for clients.
 
 ### Decrease balance for a client [POST/api/operations/cash-management/cash-out]
 
++ Body description
+    + clientId: (string) - Client ID for which a balance will change.
+    + assetId: (string) - Asset ID to change balance.
+    + amount: (decimal) - Balance change amount.
+    
 + Request (application/json)
 
     + Headers
