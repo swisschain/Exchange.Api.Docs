@@ -35,6 +35,31 @@ TODO
 
 TODO
 
+## Data structures
+
+### Order book (object)
+
+Limit Order in order book.
+
++ assetPairId: `"BTCUSD"` (string) - Asset pair unique ID. 
++ timestamp: `"2020-03-31T09:23:28.241Z"` (string) - Last update date and time.
++ limitOrders (array) 
+    + id: `"order-11412"` (string) - Limit order unique ID.
+    + price: `9000.123311` (number) - Limit Order price
+    + volume: `10.2231` (number) - Limit Order volume
+    + walletId: `"client-1131"` (string) - Limit Order owner
+    + type: `"Sell"` ([Direction](#/data-structures/0/direction)) - Limit Order direction
+
+### Direction (enum)
+
+Direction of order or trade
+
++ `"Sell"` - sell direction
++ `"Buy"` - Buy direction
+
+
+    
+
 ## Asset [/api/asset/public-assets{?pageSize}]
 
 Asset controller allow broker configuration assets for his exchange.
@@ -474,7 +499,7 @@ The controller allows a broker to manage balances for clients.
 
 ### Decrease balance for a client [POST/api/operations/cash-management/cash-out]
 
-+ Body description
+*Description of the request*:
     + clientId: (string) - Client ID for which a balance will change.
     + assetId: (string) - Asset ID to change balance.
     + amount: (decimal) - Balance change amount.
@@ -499,25 +524,15 @@ The controller allows a broker to manage balances for clients.
 
 API to receive data about market
 
-## Order book [/api/books/order-books]
+## Order books [/api/books/order-books]
 
 Order book it is list of all active orders for AssetPair on exchange.
-
-**Order book structure:**
-+ Attributes (object)
-    + assetPairId: `8cea5fd7-42d4-40ac-907d-5856eacf6ab6` (string) - Asset pair unique ID. 
-    + timestamp: "2020-03-31T09:23:28.241Z" (string) - Last update date and time.
-    + limitOrders (array) - Name of base asset in pair.
-        + (object)
-            + id: `a9aa3ebb-d526-4579-b1bd-007a1e8d840d` (string) - Limit order unique ID.
-            + price: 9000.123311 (number) - Limit Order price
-            + volume: 10.2231 (number) - Limit Order volume
-            + walletId: "client-1131" (string) - Limit Order owner
-            + type: "Sell" (string) - Limit Order direction (`Sell`, `Buy`)
 
 ### Get all order books [GET]
 
 Return order books for all asset pairs of broker
+
+*Description of the response*: **array of [order-book](#/data-structures/0/order-book)**
 
 + Request (application/json)
 
@@ -556,6 +571,8 @@ Return order books for all asset pairs of broker
 
 Return order books for a specific asset pairs of broker
 
+*Description of the response*: **[order-book](#/data-structures/0/order-book)**
+
 + Parameters
     + assetPairId (string) - Asset Pair uniquie ID
 
@@ -590,6 +607,76 @@ Return order books for a specific asset pairs of broker
                 ]
             }
 
+
+## Account Data - Balance [/api/account-data]
+
+API to receiva data about current balances by account(wallet)
+
+*Description of the balance by asset*:
++ **assetId**: `"BTC"` (string) - The unique ID of asset
++ **amount**: `10.121` (number) - The balance of this asset in the wallet
++ **reserved**: `1.313` (number) - Reserved balance in limit orders
++ **timestamp**: `"2020-04-01T13:45:47.673Z"` (string) - Last update date and time
+
+### Get Balance by Wallet ID [GET/api/account-data/balances/{walletId}]
+
+Return all balances by specific wallet ID
+
++ Parameters
+    + walletId (string) - Uniquie ID of the wallet
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+              {
+                "assetId": "BTC",
+                "amount": 1.23111,
+                "reserved": 0,
+                "timestamp": "2020-04-01T13:45:47.673Z"
+              },
+              {
+                "assetId": "ETH",
+                "amount": 10,
+                "reserved": 0.23111,
+                "timestamp": "2020-04-01T13:45:47.673Z"
+              }
+            ]
+            
+            
+### Get Balance by Wallet ID and Asset ID [GET/api/account-data/balances/{walletId}/assets/{assetId}]
+
+Return balance by specific wallet ID and Asset ID
+
++ Parameters
+    + walletId (string) - Uniquie ID of the wallet
+    + assetId (string) - Uniquie ID of the asset
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "assetId": "BTC",
+                "amount": 1.23111,
+                "reserved": 0,
+                "timestamp": "2020-04-01T13:45:47.673Z"
+            }
+
+        
     
 
 ## Temp [/api/temp]
