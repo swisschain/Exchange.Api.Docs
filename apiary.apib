@@ -401,7 +401,7 @@ The controller allows a broker to manage limit orders for clients
 ### Create a new single limit order [POST]
 
 + Body description
-    + walletId: (string) - Client ID for which a limit order is set.
+    + walletId: (string) - ID of account for which a limit order is set.
     + assetPairId: (string) - Asset pair ID to make limit order.
     + price: (decimal) - Price of limit order.
     + volume: (decimal) - Volume in base asset for limmit order.
@@ -436,7 +436,7 @@ The controller allows a broker to manage limit orders for clients
 ### Delete a single limit order [DELETE/api/operations/trading/limit-order/{limitOrderId}]
 
 + Parameters
-    + limitOrderId (string) - Asset pair qniquie ID
+    + limitOrderId (string) - Asset Pair unique ID
     
 + Request 
     + Headers
@@ -495,7 +495,102 @@ The controller allows a broker to manage balances for clients.
 
 + Response 204 (application/json)
 
+# Market data source [/]
 
+API to receive data about market
+
+## Order book [/api/books/order-books]
+
+Order book it is list of all active orders for AssetPair on exchange.
+
+**Order book structure:**
++ Attributes (object)
+    + assetPairId: `8cea5fd7-42d4-40ac-907d-5856eacf6ab6` (string) - Asset pair unique ID. 
+    + timestamp: "2020-03-31T09:23:28.241Z" (string) - Last update date and time.
+    + limitOrders (array) - Name of base asset in pair.
+        + (object)
+            + id: `a9aa3ebb-d526-4579-b1bd-007a1e8d840d` (string) - Limit order unique ID.
+            + price: 9000.123311 (number) - Limit Order price
+            + volume: 10.2231 (number) - Limit Order volume
+            + walletId: "client-1131" (string) - Limit Order owner
+            + type: "Sell" (string) - Limit Order direction (`Sell`, `Buy`)
+
+### Get all order books [GET]
+
+Return order books for all asset pairs of broker
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                {
+                    "assetPairId": "a9aa3ebb-d526-4579-b1bd-007a1e8d840d",
+                    "timestamp": "2020-03-31T09:23:28.241Z",
+                    "limitOrders": [
+                      {
+                        "id": "a9aa3ebb-d526-4579-b1bd-007a1e8d840d",
+                        "price": 9000,
+                        "volume": 1,
+                        "walletId": "client-1123",
+                        "type": "Sell"
+                      },
+                      {
+                        "id": "ab496027-c605-4e3e-82c5-93687b010097",
+                        "price": 7000,
+                        "volume": 1,
+                        "walletId": "client-234",
+                        "type": "Buy"
+                      }
+                    ]
+                }
+            }
+            
+### Get order book by specific asset pair [GET/api/books/order-books/{assetPairId}]
+
+Return order books for a specific asset pairs of broker
+
++ Parameters
+    + assetPairId (string) - Asset Pair uniquie ID
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+            
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "assetPairId": "a9aa3ebb-d526-4579-b1bd-007a1e8d840d",
+                "timestamp": "2020-03-31T09:23:28.241Z",
+                "limitOrders": [
+                  {
+                    "id": "a9aa3ebb-d526-4579-b1bd-007a1e8d840d",
+                    "price": 9000,
+                    "volume": 1,
+                    "walletId": "client-1123",
+                    "type": "Sell"
+                  },
+                  {
+                    "id": "ab496027-c605-4e3e-82c5-93687b010097",
+                    "price": 7000,
+                    "volume": 1,
+                    "walletId": "client-234",
+                    "type": "Buy"
+                  }
+                ]
+            }
+
+    
 
 ## Temp [/api/temp]
 
