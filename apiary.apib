@@ -606,6 +606,66 @@ Return order books for a specific asset pairs of broker
                   }
                 ]
             }
+            
+## Market data - Candles [/api/candle/candles]
+
+Return candle history by asset pair.
+
+### Get candles [GET/api/candle/candles{?assetPairId,candleType,startDate,endDate}]
+
+*Description of the response*: array of candle
++ **assetPairId** - (string) Unique ID of asset pair
++ **time** - (string) Candle timestamp
++ **type** - (string) Candle type (see URI Parameters)
++ **open** - (string) Open price
++ **close** - (string) Close Price
++ **high** - (string) Highest price
++ **low** - (string) Lowest price
+
+---
+
++ Parameters
+
+    + assetPairId (string) - Asset Pair uniquie ID (`"BTCUSD"`)
+    + candleType (string) - Data source for candles
+        + `"minute"` - candle by minute time interval
+        + `"hour"` - candle by hour time interval
+        + `"day"` - candle by day time interval
+        + `"month"` - candle by month time interval
+    + startDate (string) - start date and time in ISO format (`"2020-03-21"`)
+    + endDate (string) - start date and time in ISO format (`"2020-03-15T20:20:00Z"`)
+        
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: Bearer <put your api key>
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+                {
+                    "assetPairId": "BTCUSD",
+                    "time": "2020-03-15T20:18:00Z",
+                    "type": "minute",
+                    "open": 5284.17,
+                    "close": 5282.53,
+                    "high": 5284.67,
+                    "low": 5282.53
+                },
+                {
+                    "assetPairId": "BTCUSD",
+                    "time": "2020-03-15T20:19:00Z",
+                    "type": "minute",
+                    "open": 5282.53,
+                    "close": 5278.06,
+                    "high": 5282.82,
+                    "low": 5277.84
+                }            
+            ]
 
 
 # Account Data [/api/account-data]
