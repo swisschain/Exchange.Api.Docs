@@ -58,8 +58,6 @@ Direction of order or trade
 + `"Buy"` - Buy direction
 
 
-    
-
 ## Asset [/api/asset/public-assets{?pageSize}]
 
 Asset controller allow broker configuration assets for his exchange.
@@ -81,7 +79,7 @@ Asset controller allow broker configuration assets for his exchange.
 Get a list of all listed assets.
 
 + Parameters
-    + pageSize (optional, Number) - Count item on page
+    + pageSize (optional, number) - Count item on page
 
 + Request 
     + Headers
@@ -520,7 +518,7 @@ The controller allows a broker to manage balances for clients.
 
 + Response 204 (application/json)
 
-# Market data [/]
+## Market data [/market-data]
 
 API to receive data about market
 
@@ -763,16 +761,3 @@ Return balance by specific wallet ID and Asset ID
             {
                 "token": "....."
             }
-            
-### Get wallet balance [GET/api/operations/temp/balance/{walletId}]
-
-+ Parameters
-    + walletId (string) - Asset pair qniquie ID
-    
-+ Request 
-
-    + Headers
-
-                Authorization: Bearer <put your api key>
-    
-+ Response 200 (application/json)
