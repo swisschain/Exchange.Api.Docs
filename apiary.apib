@@ -39,16 +39,22 @@ TODO
 
 ### Order book (object)
 
-Limit Order in order book.
+Book of active limit orders
 
 + assetPairId: `"BTCUSD"` (string) - Asset pair unique ID. 
 + timestamp: `"2020-03-31T09:23:28.241Z"` (string) - Last update date and time.
-+ limitOrders (array) 
-    + id: `"order-11412"` (string) - Limit order unique ID.
-    + price: `9000.123311` (number) - Limit Order price
-    + volume: `10.2231` (number) - Limit Order volume
-    + walletId: `"client-1131"` (string) - Limit Order owner
-    + type: `"Sell"` ([Direction](#/data-structures/0/direction)) - Limit Order direction
++ limitOrders: array of [Order book levels](#/data-structures/0/order-book-level)
+
+### Order book level (object)
+
+Simplifed limit order, representing level of order book
+
++ id: `"order-11412"` (string) - Limit order unique ID.
++ price: `9000.123311` (number) - Limit Order price
++ volume: `10.2231` (number) - Limit Order volume
++ walletId: `"client-1131"` (string) - Limit Order owner
++ type: `"Sell"` ([Direction](#/data-structures/0/direction)) - Limit Order direction
+
 
 ### Direction (enum)
 
