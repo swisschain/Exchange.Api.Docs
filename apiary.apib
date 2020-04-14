@@ -676,7 +676,7 @@ Return candle history by asset pair.
 
 API to receive data about accounts.
 
-## Account Data - Balance [/api/account-data/balances]
+## Account Data - Balances [/api/account-data/balances]
 
 API to receiva data about current balances by account(wallet)
 
@@ -745,7 +745,50 @@ Return balance by specific wallet ID and Asset ID
             }
 
         
+# Trading [/api/trading]
+
+API to create/cancel orders.
+
+## Trading - Market order [/api/trading/market-order]
+
+Create new market order
+
++ Body description
+    + id: (string) - Order id for reference.
+    + messageId: (string) - Message id for reference.
+    + walletId: (string) - Wallet ID for which an order will be created.
+    + assetPairId: (string) - Asset Pair ID to trade.
+    + volume: (decimal) - Volume to be traded.
+    + type: (enum) - Buy or Sell.
     
++ Request (application/json)
+
+    + Headers
+
+                Authorization: Bearer <put your api key>
+    
+    + Body
+    
+            {
+              "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "walletId": "1235421",
+              "messageId": "3fa85f64-5717-4562-b3fc-asdfsdafsadf",
+              "assetPairId": "BTCUSD",
+              "volume": 1.0,
+              "type": Buy
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "price": 7000,
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                "status": Matched,
+                "reason": ""
+            }
+
 
 ## Temp [/api/temp]
 
